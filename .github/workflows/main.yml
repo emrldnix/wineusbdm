@@ -26,7 +26,7 @@
                 "authToken": "${{secrets.CACHIX_AUTH_TOKEN}}"
             }
         },
-        { "name": "Build wineusbdm", "run": "nix build -L .#packages.wineusbdm"}
+        { "name": "Build wineusbdm", "run": "nix build -L .#packages.i686-linux.wineusbdm"}
       ]
     }
   }
