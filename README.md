@@ -30,6 +30,9 @@ library search path.
 winegcc usbdm.spec -shared -m32 -o usbdm.4.dll usbdm.c -lusbdm
 ```
 
+Alternatively, a Nix flake and derivation is included in this
+repository.
+
 ## Usage
 
 One way is to replace the usbdm.4.dll file in
@@ -39,6 +42,15 @@ Another way, without modifying any files, is running the program with
 `WINEDLLOVERRIDES` set:
 ```sh
 WINEDLLPATH=<path> WINEDLLOVERRIDES=usbdm.4=b wine IDE.exe
+```
+
+# Cachix
+
+There is a Cachix binary cache for this repository:
+
+```sh
+cachix use usbdm-flake
+cachix use wineusbdm
 ```
 
 ## License
