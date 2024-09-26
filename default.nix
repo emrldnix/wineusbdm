@@ -1,6 +1,7 @@
-{ stdenv
-, wine
-, usbdm
+{
+  stdenv,
+  wine,
+  usbdm,
 }:
 
 stdenv.mkDerivation {
@@ -9,7 +10,10 @@ stdenv.mkDerivation {
 
   src = ./.;
 
-  buildInputs = [ wine usbdm ];
+  buildInputs = [
+    wine
+    usbdm
+  ];
 
   buildPhase = ''
     winegcc usbdm.spec -shared -m32 -o usbdm.4.dll usbdm.c -lusbdm
