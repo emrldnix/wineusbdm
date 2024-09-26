@@ -1,7 +1,14 @@
 {
   description = "wineusbdm";
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-21.11";
-  inputs.usbdm-flake.url = "github:tadeokondrak/usbdm-flake";
+
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    usbdm-flake = {
+      url = "github:ryand56/usbdm-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
   outputs = { self, nixpkgs, usbdm-flake }:
     let
       systems = [ "x86_64-linux" "i686-linux" ];
