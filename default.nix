@@ -20,7 +20,16 @@ stdenv.mkDerivation {
   '';
 
   installPhase = ''
+    runHook preInstall
+
     mkdir -p $out/lib/wine
     mv usbdm.4.dll.so $out/lib/wine
+
+    runHook postInstall
+  '';
+
+  postInstall = ''
+    export WINEDLLPATH="$out/lib/wine"''${WINEDLLPATH:+':'}$WINEDLLPATH
+    export WINEDLLOVERRIDES="usbdm.4=b"''${WINEDLLOVERRIDES:+','}$WINEDLLOVERRIDES
   '';
 }
