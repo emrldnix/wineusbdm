@@ -1,5 +1,8 @@
 # wineusbdm
 
+> [!NOTE]
+> This doesn't fully integrate with CodeWarrior yet, but I am working on packages for both Nix and Arch. WINEDLLPATH should be to the /lib/wine folder of the built library. I've mostly experienced bugs with CodeWarrior and Wine however when ran somewhere else than directly.
+
 A DLL for use with Wine to allow use of the USBDM with CodeWarrior.
 
 USBDM is software and hardware for flashing and debugging some
