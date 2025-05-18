@@ -47,13 +47,29 @@ Another way, without modifying any files, is running the program with
 WINEDLLPATH=<path> WINEDLLOVERRIDES=usbdm.4=b wine IDE.exe
 ```
 
-# Cachix
+# Cache
 
-There is a Cachix binary cache for this repository:
+There is a binary cache for this repository:
 
-```sh
-cachix use usbdm-flake
-cachix use wineusbdm
+```nix
+nix = {
+    package = pkgs.nixVersions.latest;
+
+    settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+
+      substituters = [
+        "https://cache.ryand.ca/nixfiles/"
+      ];
+
+      trusted-public-keys = [
+        "nixfiles:lY5Oo9DfxKPS6cQR66JdFuXFUjYps9Mep/hbqJ0uo+Q="
+      ];
+    };
+};
 ```
 
 ## License
