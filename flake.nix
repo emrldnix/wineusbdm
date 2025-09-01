@@ -47,6 +47,10 @@
         inherit (nixpkgsFor.${system}) wineusbdm;
       });
 
+      checks.i686-linux = {
+        inherit (nixpkgsFor.i686-linux) wineusbdm;
+      };
+
       nixosModules =
         let
           default = import ./nixos-module.nix self;
