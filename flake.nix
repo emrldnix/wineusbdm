@@ -25,6 +25,13 @@
         wineusbdm = final.pkgsi686Linux.callPackage ./default.nix {
           usbdm = usbdm-flake.packages.i686-linux.usbdm;
         };
+
+        spidermonkey_140 =
+          if final.stdenv.hostPlatform.system == "i686-linux" then
+            prev.spidermonkey_140.overrideAttrs (oa: {
+              env.NIX_CFLAGS_COMPILE = "-Wno-error=format -Wno-error=format-security";
+            })
+          else prev.spidermonkey_140;
       };
       forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
 
