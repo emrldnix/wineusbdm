@@ -14,12 +14,10 @@ in
 {
   options.hardware.usbdm = {
     enable = lib.mkEnableOption "Whether or not to enable USBDM.";
-    package = lib.mkOption {
-      type = with lib.types; nullOr package;
+    package = lib.mkPackageOption pkgs "USBDM" {
       default = usbdmPackage;
     };
-    wineLibPackage = lib.mkOption {
-      type = with lib.types; nullOr package;
+    wineLibPackage = lib.mkPackageOption pkgs "WineUSBDM" {
       default = defaultPackage;
     };
 

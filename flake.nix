@@ -2,7 +2,7 @@
   description = "wineusbdm";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.zst";
 
     usbdm-flake = {
       url = "github:ryand56/usbdm-nix";
@@ -22,10 +22,6 @@
         "i686-linux"
       ];
       overlay = final: prev: {
-        wineusbdm = final.pkgsi686Linux.callPackage ./default.nix {
-          usbdm = usbdm-flake.packages.i686-linux.usbdm;
-        };
-
         spidermonkey_140 =
           if final.stdenv.hostPlatform.system == "i686-linux" then
             prev.spidermonkey_140.overrideAttrs (oa: {
@@ -51,12 +47,10 @@
       formatter = forAllSystems (system: nixpkgsFor.${system}.nixfmt-rfc-style);
 
       packages = forAllSystems (system: {
-        inherit (nixpkgsFor.${system}) wineusbdm;
+        wineusbdm = nixpkgsFor.${system}.callPackage ./default.nix {
+          usbdm = usbdm-flake.packages.${system}.usbdm;
+        };
       });
-
-      checks.i686-linux = {
-        inherit (nixpkgsFor.i686-linux) wineusbdm;
-      };
 
       nixosModules =
         let
